@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,8 +12,10 @@ public class Main {
         surname.add(new Person("Liza", "Averina Silina", 8));
         surname.add(new Person("Mark", "Surkov Molin", 35));
         surname.add(new Person("Lena", "Surkova Molina Regina", 30));
-
-        System.out.println("Список по знатности/возрасту:");
+        surname.add(new Person("Sony", "Averina Silina", 5));
+        System.out.println("Список по знатности/возрасту(за исключением восемнадцатилетних):");
+        Predicate<Person> exceptions = age -> age.getAge() <= 18;
+        surname.removeIf(exceptions);
         Collections.sort(surname, new NotableSurname());
         System.out.println(surname);
     }
